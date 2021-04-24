@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0, user-scalable=no" />
+<link rel="stylesheet" href="style.css">
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdRDCxC5c5OrBCeveNR4Tb50i2h4WqaKE&region=JP&language=ja"></script>
+<script type="text/javascript" src="naniwa.js"></script>
+</head>
+<body onload="drawMap()">
+<div id="map_container">
+	<div id="map_canvas"></div>
+</div>
+<button id="currentPosition" onclick="getPosition()">現在地取得</button>
+<form name="checkbox" class="fixed">
+	<label><input type="checkbox" id="小学校icon" onclick="clickCheckbox()" checked="checked">小学校</label>
+	<label><input type="checkbox" id="小学校circle" onclick="clickCheckbox1()" checked="checked">小学校:半径50m</label>
+	<label><input type="checkbox" id="小学校circle2" onclick="clickCheckbox2()" checked="checked">小学校:半径100m</label>
+	<label><input type="checkbox" id="小学校circle3" onclick="clickCheckbox3()" checked="checked">小学校:半径200m</label>
+</form>
+</body>
+</html>
