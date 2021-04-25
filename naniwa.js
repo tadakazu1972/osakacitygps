@@ -1,8 +1,8 @@
 //マップオブジェクト設定
 var mapObj;
-//浪速区の中心地を安養寺の緯度・軽度の初期値に設定
-var posX=135.49515;
-var posY=34.659552;
+//中心地設定
+var posX=135.5847133;
+var posY=34.7188567;
 //小中校のマーカーと円の配列（表示、非表示で操作するため）
 var allmarkers = new Array();
 var allcircles = new Array();
@@ -96,7 +96,7 @@ function drawMap(){
 	xhr.send(null);
 
 	//防犯カメラ（公設置）
-	drawFacilities("camera_naniwa.csv", "icon_camera32x32.png");
+	drawFacilities("naniwa800se655_20900401v2.csv", "icon_camera32x32.png");
 
 	//浪速区境界ポリゴン
 	//ポリゴン緯度経度データ　CSVファイル読み込み
@@ -142,7 +142,7 @@ function attachMessage(getmarker, name, add, tel, posy, posx) {
 	});
 }
 
-//防犯カメラ描画
+//GPS描画
 function drawFacilities(filename, iconname){
 	var xhr = new XMLHttpRequest();
 	xhr.onload = function(){
@@ -165,23 +165,23 @@ function drawFacilities(filename, iconname){
 				new google.maps.Point(18,18)
 			);
 			var marker = new google.maps.Marker({
-				position: new google.maps.LatLng( parseFloat(data[0]), parseFloat(data[1]) ),
+				position: new google.maps.LatLng( parseFloat(data[2]), parseFloat(data[3]) ),
 				map: mapObj,
 				icon: marker_image,
 				title: data[2]
 			});
-			//csvファイル　住所:data[2] 設置場所:data[3] 事業名:data[4] 設置台数:data[5]
-			attachMessage2(marker, data[2], data[3], data[4], data[5]);
+			//csvファイル　日時:data[0] 車番:data[1]
+			attachMessage2(marker, data[0], data[1]);
 		}
 	};
 	xhr.open("get", filename, true);
 	xhr.send(null);
 }
 
-//防犯カメラinfowindow
-function attachMessage2(getmarker, address, place, year, number) {
+//GPSinfowindow
+function attachMessage2(getmarker, date_time, car_no) {
 	//Infowindow生成
-	var infowin = new google.maps.InfoWindow({ content:"住所:"+address+"</br>設置場所:"+place+"</br>事業名:"+year+"</br>設置台数:"+number});
+	var infowin = new google.maps.InfoWindow({ content:"日時:"+date_time+"</br>車番:"+car_no});
 	//マウスオーバー
 	google.maps.event.addListener(getmarker, 'mouseover', function() {
 		infowin.open(getmarker.getMap(), getmarker);
