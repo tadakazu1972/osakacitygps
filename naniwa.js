@@ -96,7 +96,7 @@ function drawMap(){
 	xhr.send(null);
 
 	//防犯カメラ（公設置）
-	drawFacilities("naniwa800se655_20900401v2.csv", "icon_camera32x32.png");
+	drawFacilities("naniwa800se655_20190401v2.csv", "icon_camera32x32.png");
 
 	//浪速区境界ポリゴン
 	//ポリゴン緯度経度データ　CSVファイル読み込み
